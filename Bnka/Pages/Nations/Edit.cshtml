@@ -1,0 +1,10 @@
+﻿@page
+@model Bnka.Pages.Nations.EditModel
+@{
+}
+<form method="post">
+    <input asp-for="EditObject.Id" hidden />
+    <label>Nationality Name</label>
+    <input asp-for="EditObject.Name" />
+    <button type="submit">Save</button>
+</form>

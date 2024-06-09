@@ -1,0 +1,31 @@
+﻿@page
+@model Bnka.Pages.Nations.IndexModel
+@{
+}
+
+<h1>Nationalties </h1>
+
+<table class="table table-primary">
+       <tbody>
+           @foreach(var n in Model.Nationalities)
+            {
+                <tr>
+                    <td>
+                        @n.Name
+                    </td>
+                    <td>
+                        <form method="post">
+                            <input id="id" name="id" value="@n.Id" hidden />
+                            <button class="btn btn-danger" type="submit">Del</button>
+                        <a class="btn btn-warning" asp-page="Edit" asp-route-id="@n.Id"> Edit </a>
+
+                        </form>
+                    
+                    </td>
+                   
+
+                </tr>
+            }
+       </tbody>
+
+   </table>

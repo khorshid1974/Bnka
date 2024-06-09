@@ -1,0 +1,96 @@
+﻿@page
+@model Bnka.Pages.ParentFolder.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Parents List</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Parent[0].FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Parent[0].Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Parent[0].DOB)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Parent[0].Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Parent[0].Place)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Parent[0].Nationality)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Parent) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DOB)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Place.PlaceNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nationality.Name)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<div class="row">
+    @foreach (var parent in Model.Parent)
+    {
+
+        var imageName = parent.Photo == null ? "person.webp" : parent.Photo;
+        
+        <div class="card col-4 m-2" style="width: 18rem;">
+            <img src="/Uploads/@imageName" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">@parent.FullName</h5>
+                <h5 class="card-title">@parent.DOB</h5>
+                <h5 class="card-title">@parent.Gender</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+                @foreach (var child in parent.Childern) 
+                {
+                    <li class="list-group-item">  @child.Name</li>
+                }
+                
+                
+            </ul>
+            <div class="card-body">
+                <a href="#" class="card-link">Card link</a>
+                <a href="#" class="card-link">Another link</a>
+            </div>
+        </div>
+    }
+</div>
+
+
